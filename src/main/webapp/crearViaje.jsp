@@ -3,6 +3,7 @@
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="estudiante" scope="session" type="com.example.lab10.Beans.EstudianteBean"/>
 <html>
     <head>
         <title>TeleViajes</title>
@@ -11,8 +12,24 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="estilosPrincipal.css" rel="stylesheet" type="text/css">
         <style>
+            <% if(estudiante.getStatus().equals("Normal")){%>
             nav {
-                background: green;
+                background: blue;
+            }
+            <%} else if (estudiante.getStatus().equals("Silver")){%>
+            nav {
+                background: #e3e4e5;
+            }
+            <%} else if (estudiante.getStatus().equals("Gold")){%>
+            nav {
+                background: goldenrod;
+            }
+            <%} else if (estudiante.getStatus().equals("Platinum")){%>
+            nav {
+                background: black;
+            }
+            <%}%>
+            nav {
                 height: 80px;
                 width: 100%;
             }
@@ -31,9 +48,9 @@
         </label>
         <label class="logo"><span>Televiajes</span></label>
         <ul>
-            <label class="nombre"><span>Angelo Ramos</span></label>
-            <label class="status"><span>Normal</span></label>
-            <li><a href="#">Cerrar Sesión</a></li>
+            <label class="nombre"><span><%=estudiante.getNombre() + " " + estudiante.getApellido()%></span></label>
+            <label class="status"><span><%=estudiante.getStatus()%></span></label>
+            <li><a href="<%=request.getContextPath()%>/?action=logout">Cerrar Sesión</a></li>
         </ul>
     </nav>
     <section>

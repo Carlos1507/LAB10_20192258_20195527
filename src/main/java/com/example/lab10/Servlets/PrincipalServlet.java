@@ -34,6 +34,7 @@ public class PrincipalServlet extends HttpServlet {
                     view.forward(request, response);
                 }
                 case "crear" -> {
+                    session.setAttribute("estudiante", estud);
                     RequestDispatcher view = request.getRequestDispatcher("crearViaje.jsp");
                     view.forward(request, response);
                 }
@@ -89,7 +90,12 @@ public class PrincipalServlet extends HttpServlet {
                     LocalDate fechaReserva = LocalDate.now();
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    String seguro = request.getParameter("seguro");
+                    String seguroRec = request.getParameter("seguro");
+                    String seguro = "";
+                    if(seguroRec.contains("-")){
+                        String palabras[] = seguroRec.split("-");
+                        seguro = palabras[0]+" "+palabras[1];
+                    }
                     String numBoletos = request.getParameter("numBoletos");
                     String costoTotal = request.getParameter("costoTotal");
 
@@ -105,11 +111,16 @@ public class PrincipalServlet extends HttpServlet {
                     String fechaReserva = request.getParameter("fechaReserva");
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
-                    String seguro = "";
+                    String seguroRec = "";
                     if(request.getParameter("seguro1") != null){
-                        seguro = request.getParameter("seguro1"); //si es que lo edita el usuario
+                        seguroRec = request.getParameter("seguro1"); //si es que lo edita el usuario
                     }else {
-                        seguro = request.getParameter("seguro2");  //el original
+                        seguroRec = request.getParameter("seguro2");  //el original
+                    }
+                    String seguro = "";
+                    if(seguroRec.contains("-")){
+                        String palabras[] = seguroRec.split("-");
+                        seguro = palabras[0]+" "+palabras[1];
                     }
                     String numBoletos = request.getParameter("numBoletos");
                     String costoTotal = request.getParameter("costoTotal");
