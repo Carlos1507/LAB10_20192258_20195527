@@ -21,7 +21,7 @@
     </head>
     <body background="fondo.jpg">
         <!-- Login-->
-        <form id="signup">
+        <form id="signup" method="POST" action="">
             <div class="text-center">
                 <img src="logo.png" width="200"/></a>
             </div>
@@ -31,8 +31,8 @@
                     <h3 class="etiUser">Bienvenido Televiajero</h3>
                 </div>
             </div>
-            <input type="text" placeholder="Usuario" required="">
-            <input type="password" placeholder="Contraseña" required="">
+            <input type="email" placeholder="Usuario" required>
+            <input type="password" placeholder="Contraseña" required>
             <br/>
             <br/>
             <div class="text-center">
@@ -41,7 +41,7 @@
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
                     <div class="etiUser2">
-                        <a href="popup.html"> <u>Términos y Condiciones</u></a>
+                        <a href="popup.html"> <u>Soy nuevo y quiero registrarme</u></a>
                     </div>
                 </div>
             </div>

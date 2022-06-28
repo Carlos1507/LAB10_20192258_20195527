@@ -12,6 +12,9 @@
 ::-webkit-input-placeholder {
     color: #bbb;
 }
+a.active, a:hover{
+    background: #fff;
+}
 
 :-moz-placeholder {
     color: #bbb;
