@@ -13,29 +13,24 @@
     <% if(estudianteSession.getStatus().equals("Normal")){%>
     nav {
       background: blue;
-      height: 80px;
-      width: 100%;
     }
     <%} else if (estudianteSession.getStatus().equals("Silver")){%>
     nav {
-    background: silver;
-    height: 80px;
-    width: 100%;
+    background: #e3e4e5;
     }
     <%} else if (estudianteSession.getStatus().equals("Gold")){%>
     nav {
     background: goldenrod;
-    height: 80px;
-    width: 100%;
     }
     <%} else if (estudianteSession.getStatus().equals("Platinum")){%>
     nav {
     background: black;
-    height: 80px;
-    width: 100%;
     }
     <%}%>
-
+    nav{
+      height: 80px;
+      width: 100%;
+    }
     .lista {
       background-color: white;
       margin-top: 50px;
@@ -51,7 +46,7 @@
   </label>
   <label class="logo"><span>Televiajes</span></label>
   <ul>
-    <label class="nombre"><span><%=estudianteSession.getNombre()%></span></label>
+    <label class="nombre"><span><%=estudianteSession.getNombre() + " " + estudianteSession.getApellido()%></span></label>
     <label class="status"><span><%=estudianteSession.getStatus()%></span></label>
     <li><a href="#">Cerrar Sesión</a></li>
   </ul>

@@ -45,7 +45,7 @@ public class UsuarioServlet extends HttpServlet {
                         response.sendRedirect(request.getContextPath()+ "/UsuarioServlet?mensaje=noCoinciden");
                     } else{
                         estudianteDao.crearEstudiante(nombre, apellido, edad, codigo, especialidad, correo, contrasenia);
-                        response.sendRedirect(request.getContextPath()+"/LoginServlet");
+                        response.sendRedirect(request.getContextPath()+"/");
                     }
                 }catch (NumberFormatException e){
                     e.printStackTrace();

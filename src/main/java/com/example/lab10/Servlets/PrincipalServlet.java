@@ -2,6 +2,7 @@ package com.example.lab10.Servlets;
 
 import com.example.lab10.Beans.EstudianteBean;
 import com.example.lab10.Beans.ViajeBean;
+import com.example.lab10.Daos.LoginDao;
 import com.example.lab10.Daos.PrincipalDao;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,8 @@ import java.time.LocalDate;
 public class PrincipalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        LoginDao loginDao = new LoginDao();
         HttpSession session = request.getSession();
         EstudianteBean estud = (EstudianteBean) session.getAttribute("estudianteSession");
         if(estud!=null){
@@ -25,6 +28,7 @@ public class PrincipalServlet extends HttpServlet {
             PrincipalDao principalDao = new PrincipalDao();
             switch (action){
                 case "listar" -> {
+                    estud.setStatus(loginDao.obtenerStatus(estud));
                     request.setAttribute("listaViajes",principalDao.listarViajes(estud.getCodigoPUCP()));
                     RequestDispatcher view = request.getRequestDispatcher("principal.jsp");
                     view.forward(request, response);
@@ -37,6 +41,7 @@ public class PrincipalServlet extends HttpServlet {
                     String idViaje = request.getParameter("id");
                     ViajeBean viajeBean = principalDao.buscarViaje(idViaje);
                     if(viajeBean != null){
+                        session.setAttribute("estudiante", estud);
                         request.setAttribute("viajeBean",viajeBean);
                         RequestDispatcher view = request.getRequestDispatcher("editarViaje.jsp");
                         view.forward(request, response);
@@ -56,6 +61,7 @@ public class PrincipalServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         EstudianteBean estud = (EstudianteBean) session.getAttribute("estudianteSession");
         if(estud!=null){
@@ -111,6 +117,8 @@ public class PrincipalServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
                 }
             }
+        }else{
+            response.sendRedirect(request.getContextPath()+"/");
         }
 
     }
