@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CARLOS
-  Date: 27/06/2022
-  Time: 23:18
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.lab10.Beans.ViajeBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaViajes" scope="request" type="java.util.ArrayList<com.example.lab10.Beans.ViajeBean>" />
 <html>
 <head>
     <title>TeleViajes</title>
@@ -41,36 +36,38 @@
 </nav>
 <section>
 <div class='container lista'>
-  <h1 class='mb-3'>Lista de empleados</h1>
-  <a href="" class="btn btn-primary mb-4">Agregar nuevo empleado</a>
+  <h1 class='mb-3'>Lista de viajes</h1>
+  <a href="" class="btn btn-primary mb-4">Agregar nuevo viaje</a>
   <table class="table">
     <thead>
-    <tr>
-      <th>#</th>
-      <th>Employee</th>
-      <th>Email</th>
-      <th>Job ID</th>
-      <th>Salary</th>
-      <th>Commision</th>
-      <th>Manager ID</th>
-      <th>Department ID</th>
-      <th></th>
-      <th></th>
-    </tr>
+      <tr>
+        <th>Identificador</th>
+        <th>Fecha reserva</th>
+        <th>Fecha viaje</th>
+        <th>Ciudad origen</th>
+        <th>Ciudad destino</th>
+        <th>Seguro</th>
+        <th>Num boletos</th>
+        <th>Costo total</th>
+        <th></th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>1</td>
-      <td>Nombre1</td>
-      <td>Correo 1</td>
-      <td>JOBID1</td>
-      <td>Salary 1</td>
-      <td>PCT 1</td>
-      <td>manager id 1</td>
-      <td>department id 1</td>
-      <td><a href="">Editar</a></td>
-      <td><a href="">Borrar</a></td>
-    </tr>
+      <%for(ViajeBean viaje : listaViajes){ %>
+      <tr>
+        <td><%=viaje.getIdViaje()%></td>
+        <td><%=viaje.getFechaReserva()%></td>
+        <td><%=viaje.getFechaViaje()%></td>
+        <td><%=viaje.getCiudadOrigen()%></td>
+        <td><%=viaje.getCiudadDestino()%></td>
+        <td><%=viaje.getSeguro()%></td>
+        <td><%=viaje.getNumBoletos()%></td>
+        <td><%=viaje.getCostoTotal()%></td>
+        <td><a href="">Editar</a></td>
+        <td><a href="">Borrar</a></td>
+      </tr>
+      <%}%>
     </tbody>
 
   </table>

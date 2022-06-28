@@ -1,5 +1,7 @@
 package com.example.lab10.Servlets;
 
+import com.example.lab10.Daos.PrincipalDao;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +14,17 @@ import java.io.IOException;
 public class PrincipalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("principal.jsp");
-        view.forward(request, response);
+        String action = request.getParameter("a") == null? "listar" : request.getParameter("a");
+        PrincipalDao principalDao = new PrincipalDao();
+        switch (action){
+            case "listar" -> {
+                request.setAttribute("listaViajes",principalDao.listarViajes());
+
+                RequestDispatcher view = request.getRequestDispatcher("principal.jsp");
+                view.forward(request, response);
+            }
+        }
+
     }
 
     @Override
