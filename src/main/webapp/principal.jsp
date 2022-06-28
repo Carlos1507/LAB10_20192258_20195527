@@ -71,7 +71,8 @@
       </tr>
     </thead>
     <tbody>
-      <%for(ViajeBean viaje : listaViajes){ %>
+      <%int i = 1;
+        for(ViajeBean viaje : listaViajes){ %>
       <tr>
         <td><%=viaje.getIdViaje()%></td>
         <td><%=viaje.getFechaReserva()%></td>
@@ -81,14 +82,49 @@
         <td><%=viaje.getSeguro()%></td>
         <td><%=viaje.getNumBoletos()%></td>
         <td><%=viaje.getCostoTotal()%></td>
-        <td><a href="<%=request.getContextPath()%>/PrincipalServlet?a=editar&id=<%=viaje.getIdViaje()%>">Editar</a></td>
-        <td><a href="<%=request.getContextPath()%>/PrincipalServlet?a=borrar&id=<%=viaje.getIdViaje()%>">Borrar</a></td>
+        <td><a class="btn btn-primary" href="<%=request.getContextPath()%>/PrincipalServlet?a=editar&id=<%=viaje.getIdViaje()%>">Editar</a></td>
+        <td><button type="button" data-bs-toggle="modal" data-bs-target="#Modal<%=i%>" class="btn btn-danger">Borrar</button></td>
       </tr>
-      <%}%>
+      <%i++;}%>
     </tbody>
 
   </table>
 </div>
+  <!-- Modal -->
+  <%int j = 1;
+    for(ViajeBean viaje2 : listaViajes){ %>
+  <div class="modal fade" id="Modal<%=j%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Advertencia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Si esta seguro de eliminar ingrese contraseña
+          <form method="post" class="row g-3" action="<%=request.getContextPath()%>/PrincipalServlet?a=buscar">
+            <div class="col-auto">
+              <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <a href="<%=request.getContextPath()%>/PrincipalServlet?a=borrar&id=<%=viaje2.getIdViaje()%>" class="btn btn-danger">Borrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%j++;}%>
 </section>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="js/scripts.js"></script>
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <!-- * *                               SB Forms JS                               * *-->
+  <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+  <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
