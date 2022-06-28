@@ -92,8 +92,8 @@ public class PrincipalServlet extends HttpServlet {
                     String destino = request.getParameter("destino");
                     String seguroRec = request.getParameter("seguro");
                     String seguro = "";
-                    if(seguroRec.contains("-")){
-                        String palabras[] = seguroRec.split("-");
+                    if(seguroRec.contains("_")){
+                        String palabras[] = seguroRec.split("_");
                         seguro = palabras[0]+" "+palabras[1];
                     }
                     String numBoletos = request.getParameter("numBoletos");
@@ -118,8 +118,8 @@ public class PrincipalServlet extends HttpServlet {
                         seguroRec = request.getParameter("seguro2");  //el original
                     }
                     String seguro = "";
-                    if(seguroRec.contains("-")){
-                        String palabras[] = seguroRec.split("-");
+                    if(seguroRec.contains("_")){
+                        String palabras[] = seguroRec.split("_");
                         seguro = palabras[0]+" "+palabras[1];
                     }
                     String numBoletos = request.getParameter("numBoletos");
