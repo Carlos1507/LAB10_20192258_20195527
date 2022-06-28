@@ -56,6 +56,8 @@ public class PrincipalServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
                 }
             }
+        }else{
+            response.sendRedirect(request.getContextPath()+"/");
         }
     }
 

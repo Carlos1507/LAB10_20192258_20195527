@@ -11,10 +11,19 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String mensaje = request.getParameter("error")==null?"":request.getParameter("error");
-        request.setAttribute("error",mensaje);
-        RequestDispatcher view = request.getRequestDispatcher("iniciaSesion.jsp");
-        view.forward(request, response);
+        String action = request.getParameter("action")==null?"lista":request.getParameter("action");
+        switch (action){
+            case "lista":
+                String mensaje = request.getParameter("error")==null?"":request.getParameter("error");
+                request.setAttribute("error",mensaje);
+                RequestDispatcher view = request.getRequestDispatcher("iniciaSesion.jsp");
+                view.forward(request, response);
+            case "logout":
+                HttpSession session = request.getSession();
+                session.invalidate();
+                response.sendRedirect(request.getContextPath());
+                break;
+        }
     }
 
     @Override

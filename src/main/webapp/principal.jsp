@@ -48,7 +48,7 @@
   <ul>
     <label class="nombre"><span><%=estudianteSession.getNombre() + " " + estudianteSession.getApellido()%></span></label>
     <label class="status"><span><%=estudianteSession.getStatus()%></span></label>
-    <li><a href="#">Cerrar Sesión</a></li>
+    <li><a href="<%=request.getContextPath()%>/?action=logout">Cerrar Sesión</a></li>
   </ul>
 </nav>
 <section>
