@@ -37,7 +37,24 @@
 <section>
 <div class='container lista'>
   <h1 class='mb-3'>Lista de viajes</h1>
-  <a href="" class="btn btn-primary mb-4">Agregar nuevo viaje</a>
+
+  <a href="<%=request.getContextPath()%>/PrincipalServlet?a=crear" class="btn btn-primary mb-4">Agregar nuevo viaje</a>
+
+  <form method="post" class="row g-3" action="<%=request.getContextPath()%>/PrincipalServlet?a=buscar">
+    <div class="col-auto">
+      <p>Búsqueda por ciudad: </p>
+    </div>
+    <div class="col-auto">
+      <input type="text" class="form-control" name="ciudad" id="ciudad" placeholder="Origen o Destino">
+      <div class="invalid-feedback">
+        In this case is not necessary
+      </div>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+    </div>
+  </form>
+
   <table class="table">
     <thead>
       <tr>
@@ -48,7 +65,7 @@
         <th>Ciudad destino</th>
         <th>Seguro</th>
         <th>Num boletos</th>
-        <th>Costo total</th>
+        <th>Costo total (S/.)</th>
         <th></th>
         <th></th>
       </tr>
