@@ -81,7 +81,7 @@
         <td><%=viaje.getSeguro()%></td>
         <td><%=viaje.getNumBoletos()%></td>
         <td><%=viaje.getCostoTotal()%></td>
-        <td><a href="">Editar</a></td>
+        <td><a href="<%=request.getContextPath()%>/PrincipalServlet?a=editar&id=<%=viaje.getIdViaje()%>">Editar</a></td>
         <td><a href="">Borrar</a></td>
       </tr>
       <%}%>

@@ -1,5 +1,6 @@
 package com.example.lab10.Servlets;
 
+import com.example.lab10.Beans.ViajeBean;
 import com.example.lab10.Daos.PrincipalDao;
 
 import javax.servlet.RequestDispatcher;
@@ -27,6 +28,17 @@ public class PrincipalServlet extends HttpServlet {
             case "crear" -> {
                 RequestDispatcher view = request.getRequestDispatcher("crearViaje.jsp");
                 view.forward(request, response);
+            }
+            case "editar" -> {
+                String idViaje = request.getParameter("id");
+                ViajeBean viajeBean = principalDao.buscarViaje(idViaje);
+                if(viajeBean != null){
+                    request.setAttribute("viajeBean",viajeBean);
+                    RequestDispatcher view = request.getRequestDispatcher("editarViaje.jsp");
+                    view.forward(request, response);
+                }else{
+                    response.sendRedirect(request.getContextPath() + "/PrincipalServlet");  //lo mano a la pagina principal
+                }
             }
         }
 
@@ -64,7 +76,24 @@ public class PrincipalServlet extends HttpServlet {
 
                 principalDao.crearViajeEnEstudiante("20214192",idViaje); //luego cambiar con session
 
+                response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
+            }
+            case "actualizar" -> {
+                String idViaje = request.getParameter("idViaje");
+                String fechaViaje = request.getParameter("fechaViaje");
+                String fechaReserva = request.getParameter("fechaReserva");
+                String origen = request.getParameter("origen");
+                String destino = request.getParameter("destino");
+                String seguro = "";
+                if(request.getParameter("seguro1") != null){
+                    seguro = request.getParameter("seguro1"); //si es que lo edita el usuario
+                }else {
+                    seguro = request.getParameter("seguro2");  //el original
+                }
+                String numBoletos = request.getParameter("numBoletos");
+                String costoTotal = request.getParameter("costoTotal");
 
+                principalDao.editarViaje(idViaje,fechaViaje,fechaReserva,origen,destino,seguro,numBoletos,costoTotal);
 
                 response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
             }

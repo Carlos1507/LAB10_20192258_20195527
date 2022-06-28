@@ -106,4 +106,55 @@ public class PrincipalDao extends BaseDao{
             e.printStackTrace();
         }
     }
+
+    public ViajeBean buscarViaje(String idViaje){
+        ViajeBean viajeBean = null;
+
+        String sql = "select * from viaje where idViaje = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);){
+
+            pstmt.setString(1,idViaje);
+
+            try (ResultSet rs = pstmt.executeQuery();){
+
+                if (rs.next()){
+                    viajeBean = new ViajeBean();
+                    viajeBean.setIdViaje(rs.getString(1));
+                    viajeBean.setFechaReserva(rs.getString(2));
+                    viajeBean.setFechaViaje(rs.getString(3));
+                    viajeBean.setCiudadOrigen(rs.getString(4));
+                    viajeBean.setCiudadDestino(rs.getString(5));
+                    viajeBean.setSeguro(rs.getString(6));
+                    viajeBean.setNumBoletos(rs.getInt(7));
+                    viajeBean.setCostoTotal(rs.getFloat(8));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return viajeBean;
+    }
+
+    public void editarViaje(String idViaje,String fechaViaje,String fechaReserva,String origen,String destino,String seguro,String numBoletos,String costoTotal){
+        String sql = "UPDATE `lab10`.`viaje` SET `fechaReserva` = ?, `fechaViaje` = ?, `ciudadOrigen` = ?, `ciudadDestino` = ?, `seguro` = ?, `numBoletos` = ?, `costoTotal` = ? WHERE (`idViaje` = ?);";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);){
+
+            pstmt.setString(8,idViaje);
+            pstmt.setString(1,fechaReserva);
+            pstmt.setString(2,fechaViaje);
+            pstmt.setString(3,origen);
+            pstmt.setString(4,destino);
+            pstmt.setString(5,seguro);
+            pstmt.setInt(6,Integer.parseInt(numBoletos));
+            pstmt.setFloat(7,Float.parseFloat(costoTotal));
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
