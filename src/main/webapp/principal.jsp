@@ -82,7 +82,7 @@
         <td><%=viaje.getNumBoletos()%></td>
         <td><%=viaje.getCostoTotal()%></td>
         <td><a href="<%=request.getContextPath()%>/PrincipalServlet?a=editar&id=<%=viaje.getIdViaje()%>">Editar</a></td>
-        <td><a href="">Borrar</a></td>
+        <td><a href="<%=request.getContextPath()%>/PrincipalServlet?a=borrar&id=<%=viaje.getIdViaje()%>">Borrar</a></td>
       </tr>
       <%}%>
     </tbody>

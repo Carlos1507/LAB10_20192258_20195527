@@ -157,4 +157,32 @@ public class PrincipalDao extends BaseDao{
             e.printStackTrace();
         }
     }
+
+    public void borrar(String idViaje){
+        String sql = "delete from viaje where idViaje = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);){
+
+            pstmt.setString(1,idViaje);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void borrarPorEstudiante(String idViaje){
+        String sql = "delete from registroviajesporalumno where Viaje_idViaje = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql);){
+
+            pstmt.setString(1,idViaje);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -37,8 +37,14 @@ public class PrincipalServlet extends HttpServlet {
                     RequestDispatcher view = request.getRequestDispatcher("editarViaje.jsp");
                     view.forward(request, response);
                 }else{
-                    response.sendRedirect(request.getContextPath() + "/PrincipalServlet");  //lo mano a la pagina principal
+                    response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
                 }
+            }
+            case "borrar" -> {
+                String idViaje = request.getParameter("id");
+                principalDao.borrarPorEstudiante(idViaje);
+                principalDao.borrar(idViaje);
+                response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
             }
         }
 
