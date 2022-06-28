@@ -51,7 +51,8 @@
   </label>
   <label class="logo"><span>Televiajes</span></label>
   <ul>
-    <label class="nombre"><span><%=estudianteSession.getNombre()%></span></label>
+    <%String nombreCompleto = estudianteSession.getNombre() + " " + estudianteSession.getApellido();%>
+    <label class="nombre"><span><%=nombreCompleto%></span></label>
     <label class="status"><span><%=estudianteSession.getStatus()%></span></label>
     <li><a href="#">Cerrar Sesión</a></li>
   </ul>
