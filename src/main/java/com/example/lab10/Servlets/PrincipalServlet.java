@@ -95,6 +95,8 @@ public class PrincipalServlet extends HttpServlet {
                     if(seguroRec.contains("_")){
                         String palabras[] = seguroRec.split("_");
                         seguro = palabras[0]+" "+palabras[1];
+                    }else{
+                        seguro=seguroRec;
                     }
                     String numBoletos = request.getParameter("numBoletos");
                     String costoTotal = request.getParameter("costoTotal");
@@ -112,21 +114,24 @@ public class PrincipalServlet extends HttpServlet {
                     String origen = request.getParameter("origen");
                     String destino = request.getParameter("destino");
                     String seguroRec = "";
+                    System.out.println("seguro1 "+request.getParameter("seguro1"));
+                    System.out.println("seguro2 "+request.getParameter("seguro2"));
                     if(request.getParameter("seguro1") != null){
                         seguroRec = request.getParameter("seguro1"); //si es que lo edita el usuario
                     }else {
                         seguroRec = request.getParameter("seguro2");  //el original
                     }
+                    System.out.println("seguroRec "+seguroRec);
                     String seguro = "";
                     if(seguroRec.contains("_")){
                         String palabras[] = seguroRec.split("_");
                         seguro = palabras[0]+" "+palabras[1];
+                    }else{
+                        seguro=seguroRec;
                     }
                     String numBoletos = request.getParameter("numBoletos");
                     String costoTotal = request.getParameter("costoTotal");
-
                     principalDao.editarViaje(idViaje,fechaViaje,fechaReserva,origen,destino,seguro,numBoletos,costoTotal);
-
                     response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
                 }
             }

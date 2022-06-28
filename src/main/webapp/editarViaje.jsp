@@ -63,7 +63,7 @@
                 String tomorrowToStr = tommorrosDate.toString();
                 String todayToStr = todaysDate.toString();
             %>
-            <form method="POST" action="<%=request.getContextPath()%>/PrincipalServlet?a=actualizar&idViaje=<%=viajeBean.getIdViaje()%>&seguro2=<%=viajeBean.getSeguro()%>&fechaReserva=<%=viajeBean.getFechaReserva()%>">
+            <form method="POST" action="<%=request.getContextPath()%>/PrincipalServlet?a=actualizar&idViaje=<%=viajeBean.getIdViaje()%>&fechaReserva=<%=viajeBean.getFechaReserva()%>">
                 <div class="mb-3">
                     <label for="fechaViaje" class="form-label">Fecha de viaje</label>
                     <input type="date" class="form-control" name="fechaViaje" id="fechaViaje" min="<%=tomorrowToStr%>" value="<%=viajeBean.getFechaViaje()%>" required>
@@ -82,6 +82,7 @@
                 </div>
                 <div class="form-group">
                     <!--Lista fija-->
+                    <input type="hidden" name="seguro2" value="<%=viajeBean.getSeguro()%>">
                     <label for="seguro1" class="form-label">Empresa de seguro</label>
                     <select class="form-select" name="seguro1" id="seguro1" required>
                         <option selected disabled>Usted eligió: <%=viajeBean.getSeguro()%></option>
