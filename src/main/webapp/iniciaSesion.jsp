@@ -31,7 +31,6 @@
                     <h3 class="etiUser">Bienvenido Televiajero</h3>
                 </div>
             </div>
-            <br/>
             <input type="text" placeholder="Usuario" required="">
             <input type="password" placeholder="Contraseña" required="">
             <br/>
@@ -39,7 +38,6 @@
             <div class="text-center">
                 <a href="principal.html"><button type="button" class="btn btn-outline-primary">Ingresar</button></a>
             </div>
-            <br/>
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
                     <div class="etiUser2">
