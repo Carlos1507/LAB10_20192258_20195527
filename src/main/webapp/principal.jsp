@@ -1,5 +1,6 @@
 <%@ page import="com.example.lab10.Beans.ViajeBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="estudianteSession" scope="session" type="com.example.lab10.Beans.EstudianteBean"/>
 <jsp:useBean id="listaViajes" scope="request" type="java.util.ArrayList<com.example.lab10.Beans.ViajeBean>" />
 <html>
 <head>
@@ -9,11 +10,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="estilosPrincipal.css" rel="stylesheet" type="text/css">
   <style>
+    <% if(estudianteSession.getStatus().equals("Normal")){%>
     nav {
-      background: green;
+      background: blue;
       height: 80px;
       width: 100%;
     }
+    <%} else if (estudianteSession.getStatus().equals("Silver")){%>
+    nav {
+    background: silver;
+    height: 80px;
+    width: 100%;
+    }
+    <%} else if (estudianteSession.getStatus().equals("Gold")){%>
+    nav {
+    background: goldenrod;
+    height: 80px;
+    width: 100%;
+    }
+    <%} else if (estudianteSession.getStatus().equals("Platinum")){%>
+    nav {
+    background: black;
+    height: 80px;
+    width: 100%;
+    }
+    <%}%>
+
     .lista {
       background-color: white;
       margin-top: 50px;
@@ -29,8 +51,8 @@
   </label>
   <label class="logo"><span>Televiajes</span></label>
   <ul>
-    <label class="nombre"><span>Angelo Ramos</span></label>
-    <label class="status"><span>Normal</span></label>
+    <label class="nombre"><span><%=estudianteSession.getNombre()%></span></label>
+    <label class="status"><span><%=estudianteSession.getStatus()%></span></label>
     <li><a href="#">Cerrar Sesión</a></li>
   </ul>
 </nav>

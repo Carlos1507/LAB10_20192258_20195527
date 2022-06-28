@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="error" scope="request" type="java.lang.String"/>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -21,7 +22,7 @@
     </head>
     <body background="fondo.jpg">
         <!-- Login-->
-        <form id="signup" method="POST" action="">
+        <form id="signup" method="POST" action="<%=request.getContextPath()%>/">
             <div class="text-center">
                 <img src="logo.png" width="200"/></a>
             </div>
@@ -31,17 +32,23 @@
                     <h3 class="etiUser">Bienvenido Televiajero</h3>
                 </div>
             </div>
-            <input type="email" placeholder="Usuario" required>
-            <input type="password" placeholder="Contraseña" required>
+            <input type="email" name="usuario" placeholder="Usuario (Correo PUCP)" required="">
+            <input type="password" name="contrasena" placeholder="Contraseña" required="">
+            <% if(error.equals("credencialesIncorr")) {%>
+            <div class="text-danger mb-2">Error en usuario o contraseña</div>
+            <%}else if(error.equals("noEsTeleco")){%>
+            <div class="text-danger mb-2">Usted no pertenece a la gloriosa especialidad de Telecom</div>
+            <%}else{%>
             <br/>
             <br/>
+            <%}%>
             <div class="text-center">
-                <a href="principal.html"><button type="button" class="btn btn-outline-primary">Ingresar</button></a>
+                <input type="submit" class="btn btn-outline-primary" value="Ingresar"/>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
                     <div class="etiUser2">
-                        <a href="popup.html"> <u>Soy nuevo y quiero registrarme</u></a>
+                        <a href="<%=request.getContextPath()%>/UsuarioServlet"> <u>Soy nuevo y quiero registrarme</u></a>
                     </div>
                 </div>
             </div>

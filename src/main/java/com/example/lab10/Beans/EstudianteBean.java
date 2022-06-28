@@ -1,6 +1,8 @@
 package com.example.lab10.Beans;
 
-public class EstudianteBean {
+import com.example.lab10.DTO.StatusDTO;
+
+public class EstudianteBean extends StatusDTO {
     private String codigoPUCP;
     private String nombre;
     private String apellido;
