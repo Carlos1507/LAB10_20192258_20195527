@@ -25,16 +25,16 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("contrasena");
         boolean isteleco = loginDao.validarTeleco(username);
         if (!isteleco){
-            response.sendRedirect(request.getContextPath() + "/LoginServlet?error=noEsTeleco");
+            response.sendRedirect(request.getContextPath() + "/?error=noEsTeleco");
         }else{
             estudiante = loginDao.validarContrasenia(username, password);
             if(estudiante==null){
-                response.sendRedirect(request.getContextPath() + "/LoginServlet?error=credencialesIncorr");
+                response.sendRedirect(request.getContextPath() + "/?error=credencialesIncorr");
             }else{
-                HttpSession session = request.getSession();
                 estudiante.setStatus(loginDao.obtenerStatus(estudiante));
+                HttpSession session = request.getSession();
+                session.setAttribute("estudianteSession", estudiante);
                 session.setMaxInactiveInterval(60 * 10);
-                System.out.println("Sesión exitosa");
                 response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
             }
         }

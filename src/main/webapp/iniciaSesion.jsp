@@ -22,7 +22,7 @@
     </head>
     <body background="fondo.jpg">
         <!-- Login-->
-        <form id="signup" method="POST" action="">
+        <form id="signup" method="POST" action="<%=request.getContextPath()%>/">
             <div class="text-center">
                 <img src="logo.png" width="200"/></a>
             </div>
@@ -36,19 +36,19 @@
             <input type="password" name="contrasena" placeholder="Contraseña" required="">
             <% if(error.equals("credencialesIncorr")) {%>
             <div class="text-danger mb-2">Error en usuario o contraseña</div>
-            <%}%>
-            <% if(error.equals("noEsTeleco")){%>
+            <%}else if(error.equals("noEsTeleco")){%>
             <div class="text-danger mb-2">Usted no pertenece a la gloriosa especialidad de Telecom</div>
+            <%}else{%>
+            <br/>
+            <br/>
             <%}%>
-            <br/>
-            <br/>
             <div class="text-center">
-                <a href="principal.html"><button type="button" class="btn btn-outline-primary">Ingresar</button></a>
+                <input type="submit" class="btn btn-outline-primary" value="Ingresar"/>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center">
                     <div class="etiUser2">
-                        <a href="popup.html"> <u>Soy nuevo y quiero registrarme</u></a>
+                        <a href="<%=request.getContextPath()%>/UsuarioServlet"> <u>Soy nuevo y quiero registrarme</u></a>
                     </div>
                 </div>
             </div>
