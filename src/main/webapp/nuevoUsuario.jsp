@@ -19,10 +19,10 @@
     <%}%>
     <h3>Registrar datos del estudiante</h3>
     <label>Nombre:</label>
-    <input type="text" name="nombre" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Por favor solo ingrese letras')" onchange="try{setCustomValidity('')}catch(e){}" placeholder="Ingrese su nombre" style="width: 70%;">
+    <input type="text" name="nombre" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Por favor solo ingrese un nombre')" onchange="try{setCustomValidity('')}catch(e){}" placeholder="Ingrese su nombre" style="width: 70%;">
     <BR>
     <label>Apellido:</label>
-    <input type="text" name="apellido" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Por favor solo ingrese letras')" onchange="try{setCustomValidity('')}catch(e){}" placeholder="Ingrese su apellido" style="width: 70%;">
+    <input type="text" name="apellido" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Por favor solo ingrese un apellido')" onchange="try{setCustomValidity('')}catch(e){}" placeholder="Ingrese su apellido" style="width: 70%;">
     <BR>
     <label>Edad:</label>
     <input type="number" name="edad" placeholder="Ingrese su edad" min="18" max="29"/>

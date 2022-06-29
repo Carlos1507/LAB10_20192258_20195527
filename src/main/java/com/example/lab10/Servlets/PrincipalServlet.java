@@ -4,6 +4,7 @@ import com.example.lab10.Beans.EstudianteBean;
 import com.example.lab10.Beans.ViajeBean;
 import com.example.lab10.Daos.LoginDao;
 import com.example.lab10.Daos.PrincipalDao;
+import com.mysql.cj.log.Log;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +20,9 @@ import java.time.LocalDate;
 public class PrincipalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         request.setCharacterEncoding("UTF-8");
         LoginDao loginDao = new LoginDao();
         HttpSession session = request.getSession();
@@ -50,12 +54,6 @@ public class PrincipalServlet extends HttpServlet {
                         response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
                     }
                 }
-                case "borrar" -> {
-                    String idViaje = request.getParameter("id");
-                    principalDao.borrarPorEstudiante(idViaje);
-                    principalDao.borrar(idViaje);
-                    response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
-                }
             }
         }else{
             response.sendRedirect(request.getContextPath()+"/");
@@ -64,6 +62,9 @@ public class PrincipalServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         EstudianteBean estud = (EstudianteBean) session.getAttribute("estudianteSession");
@@ -130,6 +131,20 @@ public class PrincipalServlet extends HttpServlet {
                     String costoTotal = request.getParameter("costoTotal");
                     principalDao.editarViaje(idViaje,fechaViaje,fechaReserva,origen,destino,seguro,numBoletos,costoTotal);
                     response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
+                }
+                case "borrar" -> {
+                    LoginDao loginDao = new LoginDao();
+                    String idViaje = request.getParameter("id");
+                    String contrasen = request.getParameter("password");
+                    if(loginDao.validarContrasenia(estud.getCorreoPUCP(),contrasen)!=null){
+                        principalDao.borrarPorEstudiante(idViaje);
+                        principalDao.borrar(idViaje);
+                        request.getSession().setAttribute("mensaje","exito");
+                        response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
+                    }else{
+                        request.getSession().setAttribute("mensaje", "error");
+                        response.sendRedirect(request.getContextPath() + "/PrincipalServlet");
+                    }
                 }
             }
         }else{

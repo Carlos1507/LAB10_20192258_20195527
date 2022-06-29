@@ -2,6 +2,7 @@ package com.example.lab10.Servlets;
 
 import com.example.lab10.Beans.EstudianteBean;
 import com.example.lab10.Daos.EstudianteDao;
+import com.example.lab10.Daos.LoginDao;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,6 +13,9 @@ import java.io.IOException;
 public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         String mensaje = request.getParameter("mensaje")==null?"":request.getParameter("mensaje");
         request.setAttribute("mensaje",mensaje);
         RequestDispatcher view = request.getRequestDispatcher("nuevoUsuario.jsp");
@@ -20,6 +24,9 @@ public class UsuarioServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         EstudianteBean estudiante = new EstudianteBean();
         EstudianteDao estudianteDao = new EstudianteDao();
         request.setCharacterEncoding("UTF-8");
@@ -54,12 +61,16 @@ public class UsuarioServlet extends HttpServlet {
         }
     }
     public boolean validaCorreo(String correo){
+        EstudianteDao estudianteDao = new EstudianteDao();
         boolean isValido=true;
         String usuario = correo.split("@")[0];
         for (int i = 0; i < usuario.length(); i++) {
             if (!Character.isDigit(usuario.charAt(i))) {
                 isValido = false;
             }
+        }
+        if(estudianteDao.existeUsuario(correo)){
+            isValido = false;
         }
         return isValido;
     }

@@ -52,7 +52,14 @@
   </ul>
 </nav>
 <section>
-<div class='container lista'>
+<div class='container lista' style="padding-top:10px; padding-bottom: 10px">
+  <%if (session.getAttribute("mensaje")!=null){%>
+  <% if (session.getAttribute("mensaje").equals("error")){%>
+  <div class="alert alert-danger" role="alert">Contraseña incorrecta, registro no eliminado</div>
+  <% } else {%>
+  <div class="alert alert-success" role="alert">Viaje eliminado exitosamente!</div>
+  <%} %>
+  <% session.removeAttribute("mensaje");}%>
   <h1 class='mb-3'>Lista de viajes</h1>
 
   <a href="<%=request.getContextPath()%>/PrincipalServlet?a=crear" class="btn btn-primary mb-4">Agregar nuevo viaje</a>
@@ -119,15 +126,14 @@
         </div>
         <div class="modal-body">
           Si esta seguro de eliminar ingrese contraseña
-          <form method="post" class="row g-3" action="<%=request.getContextPath()%>/PrincipalServlet?a=buscar">
+          <form method="post" class="row g-3" action="<%=request.getContextPath()%>/PrincipalServlet?a=borrar&id=<%=viaje2.getIdViaje()%>">
             <div class="col-auto">
+              <BR>
               <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña">
             </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-danger">Borrar</button>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <a href="<%=request.getContextPath()%>/PrincipalServlet?a=borrar&id=<%=viaje2.getIdViaje()%>" class="btn btn-danger">Borrar</a>
         </div>
       </div>
     </div>

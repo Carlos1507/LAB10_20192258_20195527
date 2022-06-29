@@ -1,9 +1,9 @@
 package com.example.lab10.Daos;
 
-import com.example.lab10.Beans.EstudianteBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EstudianteDao extends BaseDao{
@@ -24,5 +24,21 @@ public class EstudianteDao extends BaseDao{
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    public boolean existeUsuario(String correo){
+        boolean usuarioExistente=false;
+        String sql = "SELECT * from estudiante where correoPUCP = ?;";
+        try(Connection connection = this.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql);){
+            pstmt.setString(1, correo);
+            try (ResultSet rs = pstmt.executeQuery();){
+                if(rs.next()){
+                    usuarioExistente = true;
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return usuarioExistente;
     }
 }

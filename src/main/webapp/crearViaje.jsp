@@ -34,8 +34,11 @@
                 width: 100%;
             }
             .lista {
+                width: 50%;
                 background-color: white;
-                margin-top: 50px;
+                margin-top: 10px;
+                margin-bottom: 50px;
+                padding-bottom: 30px;
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -90,12 +93,11 @@
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
-                </br>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="numBoletos" class="form-label">Numero de boletos</label>
                     <input type="number" class="form-control" name="numBoletos" id="numBoletos" min="1" step="1" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="costoTotal" class="form-label">Costo total</label>
                     <input type="number" class="form-control" name="costoTotal" id="costoTotal" min="0.1" step="0.1" required>
                 </div>

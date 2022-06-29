@@ -36,8 +36,11 @@
                 width: 100%;
             }
             .lista {
+                width: 50%;
                 background-color: white;
-                margin-top: 50px;
+                margin-top: 10px;
+                margin-bottom: 50px;
+                padding-bottom: 30px;
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -56,7 +59,7 @@
         </ul>
     </nav>
     <section>
-        <div class="container lista">
+        <div  class="container lista">
             <h1 class="mb-3">Editar viaje</h1>
             <%LocalDate todaysDate = LocalDate.now();
                 LocalDate tommorrosDate = todaysDate.plusDays(1);
@@ -64,15 +67,15 @@
                 String todayToStr = todaysDate.toString();
             %>
             <form method="POST" action="<%=request.getContextPath()%>/PrincipalServlet?a=actualizar&idViaje=<%=viajeBean.getIdViaje()%>&fechaReserva=<%=viajeBean.getFechaReserva()%>">
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="fechaViaje" class="form-label">Fecha de viaje</label>
                     <input type="date" class="form-control" name="fechaViaje" id="fechaViaje" min="<%=tomorrowToStr%>" value="<%=viajeBean.getFechaViaje()%>" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="fechaReserva" class="form-label">Fecha de reserva</label>
                     <input type="date" class="form-control" name="fechaReserva" id="fechaReserva" value="<%=todayToStr%>" value="<%=viajeBean.getFechaReserva()%>" disabled>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="origen" class="form-label">Ciudad Origen</label>
                     <input type="text" class="form-control" name="origen" id="origen" value="<%=viajeBean.getCiudadOrigen()%>" required>
                 </div>
@@ -93,12 +96,11 @@
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
-                </br>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="numBoletos" class="form-label">Numero de boletos</label>
                     <input type="number" class="form-control" name="numBoletos" id="numBoletos" min="1" step="1" value="<%=viajeBean.getNumBoletos()%>" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" style="margin-top: 7px; margin-bottom: 7px">
                     <label for="costoTotal" class="form-label">Costo total</label>
                     <input type="number" class="form-control" name="costoTotal" id="costoTotal" min="0.1" step="0.1" value="<%=viajeBean.getCostoTotal()%>" required>
                 </div>
